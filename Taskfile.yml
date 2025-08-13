@@ -1,0 +1,57 @@
+version: '3'
+
+tasks:
+    vendor:
+        desc: 'Compile vendor folder'
+        cmds:
+            - '{{.EXEC_PHP}} composer install'
+            - '{{.EXEC_PHP}} touch vendor'
+        sources:
+            - composer.json
+            - composer.lock
+        vars:
+            EXEC_PHP:
+                sh: 'if [ "{{.DOCKER}}" = "true" ]; then echo "docker-compose exec -it php"; else echo ""; fi'
+
+    var:
+        desc: 'Make sure that folder var exists'
+        cmds:
+            - mkdir -p var
+
+    db:
+        desc: 'Create main database'
+        cmds:
+            - php bin/console doctrine:database:create --if-not-exists
+            - php bin/console doctrine:migrations:migrate --no-interaction
+
+    db-integration-test:
+        desc: 'Create integration_test database'
+        cmd: php bin/console doctrine:database:create --env=test --connection=integration_test --if-not-exists
+
+    fixcs:
+        desc: 'Code formatting tool'
+        cmd: php vendor/bin/php-cs-fixer fix --diff --verbose
+
+    lint:
+        desc: 'Check code styling'
+        cmd: php vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+
+    phpstan:
+        desc: 'Run phpstan checker'
+        cmd: ./vendor/bin/phpstan analyse
+
+    composer-normalize-fix:
+        desc: 'Normalize composer file'
+        cmd: composer normalize --diff
+
+    doctrine-validate:
+        desc: 'Validate doctrine file'
+        cmd: php bin/console doctrine:schema:validate
+
+    rector-fix:
+        desc: 'Fix code with rector'
+        cmd: php vendor/bin/rector process
+
+    rector:
+        desc: 'Check code with rector'
+        cmd: php vendor/bin/rector process --dry-run

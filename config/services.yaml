@@ -15,6 +15,23 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+    App\Service\AlphaVantageService:
+        arguments:
+            $apiKey: '%env(ALPHA_VANTAGE_API_KEY)%'
+
+    App\Service\JWTService:
+        arguments:
+            $secret: '%env(JWT_SECRET)%'
+
+    App\Service\StockDataProviderInterface:
+        alias: App\Service\AlphaVantageService
+        # alias: App\Service\MockStockService
+
+    GuzzleHttp\Client: ~
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
