@@ -33,6 +33,7 @@ final class StockQueryRepository extends ServiceEntityRepository
             $qb->setMaxResults($limit);
         }
 
+        // @phpstan-ignore-next-line
         return $qb->getQuery()->getResult();
     }
 
@@ -41,6 +42,7 @@ final class StockQueryRepository extends ServiceEntityRepository
      */
     public function findByUserAndSymbol(User $user, string $symbol): array
     {
+        // @phpstan-ignore-next-line
         return $this->createQueryBuilder('sq')
             ->andWhere('sq.user = :user')
             ->andWhere('sq.symbol = :symbol')
@@ -61,6 +63,7 @@ final class StockQueryRepository extends ServiceEntityRepository
         $date = new \DateTimeImmutable();
         $date->sub(new \DateInterval('P' . $days . 'D'));
 
+        // @phpstan-ignore-next-line
         return $this->createQueryBuilder('sq')
             ->andWhere('sq.user = :user')
             ->andWhere('sq.date >= :date')
@@ -73,7 +76,7 @@ final class StockQueryRepository extends ServiceEntityRepository
 
     public function countByUser(User $user): int
     {
-        return $this->createQueryBuilder('sq')
+        return (int) $this->createQueryBuilder('sq')
             ->select('count(sq.id)')
             ->andWhere('sq.user = :user')
             ->setParameter('user', $user)

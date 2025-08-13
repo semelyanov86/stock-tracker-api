@@ -27,7 +27,6 @@ final readonly class SendEmailHandler
 
     /**
      * @param  array<string, scalar>  $stockData
-     * @return string
      */
     private function generateEmailContent(array $stockData): string
     {

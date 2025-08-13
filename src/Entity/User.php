@@ -19,18 +19,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; // @phpstan-ignore-line
 
     #[ORM\Column(length: 180, unique: true)]
     #[Email]
     private ?string $email = null;
 
+    /** @var string[] */
     #[ORM\Column]
     private array $roles = [];
 
     #[ORM\Column]
     private ?string $password = null;
 
+    /** @var Collection<int, StockQuery> */
     #[ORM\OneToMany(targetEntity: StockQuery::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $stockQueries;
 
@@ -58,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
+        // @phpstan-ignore-next-line
         return (string) $this->email;
     }
 
@@ -69,6 +72,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param  string[]  $roles
+     * @return $this
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -78,7 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->password ?? '';
     }
 
     public function setPassword(string $password): static

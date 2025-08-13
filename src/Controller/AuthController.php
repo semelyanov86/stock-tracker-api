@@ -37,7 +37,7 @@ final class AuthController extends AbstractController
         $user = $this->entityManager->getRepository(User::class)
             ->findOneBy(['email' => $data['email']]);
 
-        if (!$user || !$this->passwordHasher->isPasswordValid($user, $data['password'])) {
+        if (!$user || !$this->passwordHasher->isPasswordValid($user, (string) $data['password'])) {
             return new JsonResponse([
                 'error' => 'Invalid credentials',
             ], Response::HTTP_UNAUTHORIZED);

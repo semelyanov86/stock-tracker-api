@@ -62,7 +62,7 @@ final class StockController extends AbstractController
         $this->entityManager->flush();
 
         $emailMessage = new SendEmailMessage(
-            $user->getEmail(),
+            $user->getEmail() ?? '',
             'Stock Quote Information',
             $stockQuote->toArray(),
         );
@@ -83,7 +83,7 @@ final class StockController extends AbstractController
             ->findBy(['user' => $user], ['date' => 'DESC']);
 
         $history = array_map(static fn(StockQuery $query) => [
-            'date' => $query->getDate()->format('c'),
+            'date' => $query->getDate()?->format('c'),
             'name' => $query->getName(),
             'symbol' => $query->getSymbol(),
             'open' => (float) $query->getOpen(),
