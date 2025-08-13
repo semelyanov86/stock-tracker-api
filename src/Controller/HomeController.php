@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home', methods: ['GET'])]
+    #[Route('/{path}', name: 'app_home', requirements: ['path' => '^(?!api).*'], methods: ['GET'], priority: -1)]
     public function index(): Response
     {
         return $this->render('home/index.html.twig');

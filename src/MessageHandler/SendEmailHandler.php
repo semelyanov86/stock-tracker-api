@@ -6,23 +6,33 @@ namespace App\MessageHandler;
 
 use App\Message\SendEmailMessage;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Mime\Email;
 
 #[AsMessageHandler]
 final readonly class SendEmailHandler
 {
     public function __construct(
         private LoggerInterface $logger,
+        private MailerInterface $mailer,
     ) {}
 
     public function __invoke(SendEmailMessage $message): void
     {
-        $this->generateEmailContent($message->stockData);
+        ray($this->generateEmailContent($message->stockData));
         $this->logger->info('Stock quote email sent', [
             'email' => $message->email,
             'subject' => $message->subject,
             'stock_data' => $message->stockData,
         ]);
+        $email = new Email()
+            ->from('noreply@stocktracker.com')
+            ->to($message->email)
+            ->subject($message->subject)
+            ->html($this->generateEmailContent($message->stockData));
+
+        $this->mailer->send($email);
     }
 
     /**
