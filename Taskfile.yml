@@ -63,3 +63,15 @@ tasks:
     test:
         desc: 'Run phpunit tests'
         cmd: php vendor/bin/phpunit --stop-on-failure --stop-on-error
+
+    dev:
+        desc: 'Run development app'
+        cmd: npm run dev
+
+    build:
+        desc: 'Build frontend app'
+        cmd: npm run build
+
+    npm-format:
+        desc: 'Run linter'
+        cmd: npm run format
