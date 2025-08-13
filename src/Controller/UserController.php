@@ -25,6 +25,7 @@ final class UserController extends AbstractController
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
     public function register(Request $request): JsonResponse
     {
+        /** @var array<string, string> $data */
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['email']) || !isset($data['password'])) {

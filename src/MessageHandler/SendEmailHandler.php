@@ -6,7 +6,9 @@ namespace App\MessageHandler;
 
 use App\Message\SendEmailMessage;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 final readonly class SendEmailHandler
 {
     public function __construct(
@@ -23,6 +25,10 @@ final readonly class SendEmailHandler
         ]);
     }
 
+    /**
+     * @param  array<string, scalar>  $stockData
+     * @return string
+     */
     private function generateEmailContent(array $stockData): string
     {
         return \sprintf(

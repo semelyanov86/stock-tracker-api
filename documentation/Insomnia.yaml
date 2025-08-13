@@ -1,0 +1,238 @@
+_type: export
+__export_format: 4
+__export_date: 2025-08-13T19:17:45.013Z
+__export_source: insomnia.desktop.app:v8.6.0
+resources:
+  - _id: req_dc02d61c1f5e43a6b846073c66a6b484
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755112631046
+    created: 1755112592624
+    url: "{{ _.BASE_URL }}/history"
+    name: Get Stock History
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+        id: pair_52d52b31656d46bbba95d379d06a4681
+      - id: pair_ebfc4ae8e39e40c786a48b67a02c22b0
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_ec40b7fd2e564f049c4fb4e0a7eab9a3
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1755112592624
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    parentId: null
+    modified: 1755111276370
+    created: 1755111276370
+    name: Web Stock
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_e7b5149342ce4b79bafeb901cece3a0b
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755112448878
+    created: 1755112404988
+    url: "{{ _.BASE_URL }}/stock?q=IBM"
+    name: Get Stock Data
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+        id: pair_2c6ebe3b2b46495daa8fb2ee4aa020cc
+      - id: pair_c281be35a25248898dda121254d02aaa
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_093be2ba0d63475dbc1d41a090e80649
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1755112404988
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_32c7006974fc4b91a63a6194c392be69
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755112101348
+    created: 1755112038545
+    url: "{{ _.BASE_URL }}/auth/login"
+    name: Login User
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@admin.com",
+        	"password": "password"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_5f07ca19b07e476b81b4eb1b2c1a167b
+      - name: User-Agent
+        value: insomnia/8.6.0
+        id: pair_6b6dce60ee8b4408a5abae2687bb0eb9
+      - id: pair_a98d6c4b904d4f82998f4355dffc1bba
+        name: Accept
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1755112038545
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d01d5b86fc354ba0820f187f95506057
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755111674711
+    created: 1755111663910
+    url: http://web.test
+    name: Root
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1755111663910
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2afd735e3bd64c4492ebc2484eb51190
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755111531000
+    created: 1755111281568
+    url: "{{ _.BASE_URL }}/register"
+    name: Register User
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@admin.com",
+        	"password": "password"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_1d678fb32d6a4564b0702453129418b7
+      - name: User-Agent
+        value: insomnia/8.6.0
+        id: pair_c156b9c19cf04d618c7a905b65558d0e
+      - id: pair_2b317988fe0b419db14501bc537c1cb1
+        name: Accept
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1755111281568
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_0babb79cda9473744178d1e0937150e1d91ea9fc
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755112208674
+    created: 1755111276373
+    name: Base Environment
+    data:
+      BASE_URL: http://web.test/api
+      TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTc1NTExMjE5MywiZXhwIjoxNzU1MTk4NTkzfQ.D6bE61K2TDFrY6p5q2chfKkQZ9SWNGxwnzD_HG7dlcc
+    dataPropertyOrder:
+      "&":
+        - BASE_URL
+        - TOKEN
+    color: null
+    isPrivate: false
+    metaSortKey: 1755111276373
+    _type: environment
+  - _id: jar_0babb79cda9473744178d1e0937150e1d91ea9fc
+    parentId: wrk_e05e4e00e0fa476fa7ef9633a3fff3ff
+    modified: 1755112102860
+    created: 1755111276376
+    name: Default Jar
+    cookies:
+      - key: sf_redirect
+        value: deleted
+        expires: 2024-08-13T19:08:21.000Z
+        maxAge: 0
+        domain: web.test
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2025-08-13T19:07:03.651Z
+        lastAccessed: 2025-08-13T19:08:22.860Z
+        id: 4a115a2b-ae9b-458e-a4ba-f5a29ee38aa6
+      - key: main_deauth_profile_token
+        value: ad1c0c
+        domain: web.test
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2025-08-13T19:07:03.652Z
+        lastAccessed: 2025-08-13T19:07:03.652Z
+        sameSite: lax
+        id: c23ce226-3941-46c7-a242-ed91ad73877f
+      - key: main_auth_profile_token
+        value: deleted
+        expires: 2024-08-13T19:07:02.000Z
+        maxAge: 0
+        domain: web.test
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2025-08-13T19:07:03.652Z
+        lastAccessed: 2025-08-13T19:07:03.652Z
+        id: 2c25810b-7f9b-49c2-9ea0-45cf5135e2ff
+    _type: cookie_jar

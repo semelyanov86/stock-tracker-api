@@ -48,7 +48,6 @@ final class StockController extends AbstractController
             ], Response::HTTP_NOT_FOUND);
         }
 
-        // Сохраняем запрос в базу данных
         $stockQuery = new StockQuery();
         $stockQuery->setUser($user);
         $stockQuery->setSymbol($stockQuote->symbol);
@@ -62,7 +61,6 @@ final class StockController extends AbstractController
         $this->entityManager->persist($stockQuery);
         $this->entityManager->flush();
 
-        // Отправляем email асинхронно
         $emailMessage = new SendEmailMessage(
             $user->getEmail(),
             'Stock Quote Information',
@@ -85,7 +83,7 @@ final class StockController extends AbstractController
             ->findBy(['user' => $user], ['date' => 'DESC']);
 
         $history = array_map(static fn(StockQuery $query) => [
-            'date' => $query->getDate()->format('c'), // ISO 8601
+            'date' => $query->getDate()->format('c'),
             'name' => $query->getName(),
             'symbol' => $query->getSymbol(),
             'open' => (float) $query->getOpen(),

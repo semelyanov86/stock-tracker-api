@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Use mock service for testing
+    App\Service\StockDataProviderInterface:
+        alias: App\Service\MockStockService
+
+    # Override services for testing
+    App\Service\MockStockService: ~

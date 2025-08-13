@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use PHPyh\ServiceDumperBundle\ServiceDumperBundle;
@@ -30,4 +31,5 @@ return [
     MonologBundle::class => ['all' => true],
     MakerBundle::class => ['dev' => true],
     ServiceDumperBundle::class => ['dev' => true, 'test' => true],
+    DAMADoctrineTestBundle::class => ['test' => true],
 ];

@@ -28,7 +28,6 @@ final readonly class JWTService
     }
 
     /**
-     * @param  string  $token
      * @return array<string, mixed>|null
      */
     public function validateToken(string $token): ?array

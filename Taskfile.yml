@@ -55,3 +55,11 @@ tasks:
     rector:
         desc: 'Check code with rector'
         cmd: php vendor/bin/rector process --dry-run
+
+    consume:
+        desc: 'Consume rabbitmq messages'
+        cmd: php bin/console messenger:consume async
+
+    test:
+        desc: 'Run phpunit tests'
+        cmd: php vendor/bin/phpunit --stop-on-failure --stop-on-error

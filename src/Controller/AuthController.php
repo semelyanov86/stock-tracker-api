@@ -25,6 +25,7 @@ final class AuthController extends AbstractController
     #[Route('/api/auth/login', name: 'api_login', methods: ['POST'])]
     public function login(Request $request): JsonResponse
     {
+        /** @var array<string, scalar> $data */
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['email']) || !isset($data['password'])) {
