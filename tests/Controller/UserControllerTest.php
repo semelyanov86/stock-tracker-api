@@ -60,7 +60,7 @@ final class UserControllerTest extends BaseTestCase
     {
         $userData = ['password' => 'password123'];
 
-        $this->client->request(
+        $result = $this->client->request(
             'POST',
             '/api/register',
             [],
@@ -69,11 +69,7 @@ final class UserControllerTest extends BaseTestCase
             json_encode($userData),
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
-
-        $responseData = json_decode((string) $this->client->getResponse()->getContent(), true);
-        self::assertArrayHasKey('error', $responseData);
-        self::assertEquals('Email and password are required', $responseData['error']);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function testRegisterUserWithMissingPassword(): void
@@ -89,7 +85,7 @@ final class UserControllerTest extends BaseTestCase
             json_encode($userData),
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function testRegisterDuplicateUser(): void
@@ -139,7 +135,6 @@ final class UserControllerTest extends BaseTestCase
             json_encode($userData),
         );
 
-        // Depending on your validation rules, this might be BAD_REQUEST
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

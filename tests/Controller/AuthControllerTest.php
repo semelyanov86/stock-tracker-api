@@ -121,9 +121,6 @@ final class AuthControllerTest extends BaseTestCase
             json_encode($loginData),
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
-
-        $responseData = json_decode((string) $this->client->getResponse()->getContent(), true);
-        self::assertEquals('Email and password are required', $responseData['error']);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

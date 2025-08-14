@@ -21,7 +21,7 @@ final readonly class JWTService
             'user_id' => $user->getId(),
             'email' => $user->getEmail(),
             'iat' => time(),
-            'exp' => time() + (24 * 60 * 60), // 24 часа
+            'exp' => time() + (24 * 60 * 60),
         ];
 
         return JWT::encode($payload, $this->secret, $this->algorithm);

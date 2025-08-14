@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\RegisterUserDTO;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -23,19 +24,10 @@ final class UserController extends AbstractController
     ) {}
 
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
-    public function register(Request $request): JsonResponse
+    public function register(#[MapRequestPayload] RegisterUserDTO $request): JsonResponse
     {
-        /** @var array<string, string> $data */
-        $data = json_decode($request->getContent(), true);
-
-        if (!isset($data['email']) || !isset($data['password'])) {
-            return new JsonResponse([
-                'error' => 'Email and password are required',
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
         $existingUser = $this->entityManager->getRepository(User::class)
-            ->findOneBy(['email' => $data['email']]);
+            ->findOneBy(['email' => $request->email]);
 
         if ($existingUser) {
             return new JsonResponse([
@@ -44,8 +36,8 @@ final class UserController extends AbstractController
         }
 
         $user = new User();
-        $user->setEmail($data['email']);
-        $user->setPassword($this->passwordHasher->hashPassword($user, $data['password']));
+        $user->setEmail($request->email);
+        $user->setPassword($this->passwordHasher->hashPassword($user, $request->password));
 
         $errors = $this->validator->validate($user);
         if (\count($errors) > 0) {

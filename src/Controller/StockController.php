@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\StockQuery;
-use App\Entity\User;
 use App\Message\SendEmailMessage;
-use App\Service\JWTService;
+use App\Service\AuthenticationService;
 use App\Service\StockDataProviderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,14 +21,14 @@ final class StockController extends AbstractController
     public function __construct(
         private readonly StockDataProviderInterface $stockDataProvider,
         private readonly EntityManagerInterface $entityManager,
-        private readonly JWTService $jwtService,
         private readonly MessageBusInterface $messageBus,
+        private readonly AuthenticationService $authenticationService,
     ) {}
 
     #[Route('/api/stock', name: 'api_stock_quote', methods: ['GET'])]
     public function getStockQuote(Request $request): JsonResponse
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = $this->authenticationService->getCurrentUser($request);
         if (!$user) {
             return new JsonResponse(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
@@ -74,7 +73,7 @@ final class StockController extends AbstractController
     #[Route('/api/history', name: 'api_stock_history', methods: ['GET'])]
     public function getStockHistory(Request $request): JsonResponse
     {
-        $user = $this->getAuthenticatedUser($request);
+        $user = $this->authenticationService->getCurrentUser($request);
         if (!$user) {
             return new JsonResponse(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
@@ -93,23 +92,5 @@ final class StockController extends AbstractController
         ], $stockQueries);
 
         return new JsonResponse($history);
-    }
-
-    private function getAuthenticatedUser(Request $request): ?User
-    {
-        $authHeader = $request->headers->get('Authorization');
-        if (!$authHeader || !str_starts_with($authHeader, 'Bearer ')) {
-            return null;
-        }
-
-        $token = substr($authHeader, 7);
-        $payload = $this->jwtService->validateToken($token);
-
-        if (!$payload || !isset($payload['user_id'])) {
-            return null;
-        }
-
-        return $this->entityManager->getRepository(User::class)
-            ->find($payload['user_id']);
     }
 }
