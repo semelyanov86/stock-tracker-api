@@ -85,22 +85,18 @@ This will start:
 Create the database and run migrations:
 
 ```bash
-php bin/console doctrine:database:create
-php bin/console doctrine:migrations:migrate
+task db
 ```
 
 
 ### 6. Start the Application
 
 ```bash
-# Using Symfony CLI
-symfony serve
-
-# Or using PHP built-in server
-php bin/console server:run
+# Using Roardunner
+task run
 ```
 
-The API will be available at `http://localhost:8000` (or the port shown in the console).
+The API will be available at `http://localhost:8080` (or the port shown in the console).
 
 ### 7. Start Message Consumer
 
@@ -115,7 +111,7 @@ task consume
 ### Base URL
 
 ```
-http://localhost:8000/api
+http://localhost:8080/api
 ```
 
 
@@ -216,7 +212,7 @@ Retrieve current stock information for a given symbol.
 
 ```bash
 curl -H "Authorization: Bearer your-jwt-token" \
-     "http://localhost:8000/api/stock?q=IBM"
+     "http://localhost:8080/api/stock?q=IBM"
 ```
 
 **Response (200 OK):**
@@ -245,7 +241,7 @@ Retrieve the history of all stock queries made by the authenticated user.
 
 ```bash
 curl -H "Authorization: Bearer your-jwt-token" \
-     "http://localhost:8000/api/history"
+     "http://localhost:8080/api/history"
 ```
 
 **Response (200 OK):**

@@ -53,3 +53,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+###> baldinof/roadrunner-bundle ###
+/bin/rr
+###< baldinof/roadrunner-bundle ###

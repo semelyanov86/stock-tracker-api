@@ -189,6 +189,19 @@
       <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
       <path value="$PROJECT_DIR$/vendor/dama/doctrine-test-bundle" />
       <path value="$PROJECT_DIR$/vendor/nelmio/cors-bundle" />
+      <path value="$PROJECT_DIR$/vendor/baldinof/roadrunner-bundle" />
+      <path value="$PROJECT_DIR$/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/vendor/roadrunner-php/roadrunner-api-dto" />
+      <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-worker" />
+      <path value="$PROJECT_DIR$/vendor/spiral/goridge" />
+      <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-http" />
+      <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-cli" />
+      <path value="$PROJECT_DIR$/vendor/spiral/logger" />
+      <path value="$PROJECT_DIR$/vendor/spiral/hmvc" />
+      <path value="$PROJECT_DIR$/vendor/spiral/security" />
+      <path value="$PROJECT_DIR$/vendor/spiral/core" />
+      <path value="$PROJECT_DIR$/vendor/spiral/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/spiral/interceptors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />

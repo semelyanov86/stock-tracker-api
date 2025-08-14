@@ -75,3 +75,7 @@ tasks:
     npm-format:
         desc: 'Run linter'
         cmd: npm run format
+
+    start:
+        desc: 'Start roadrunner application'
+        cmd: bin/rr serve

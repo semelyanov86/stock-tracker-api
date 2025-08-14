@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Baldinof\RoadRunnerBundle\BaldinofRoadRunnerBundle;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
@@ -34,4 +35,5 @@ return [
     ServiceDumperBundle::class => ['dev' => true, 'test' => true],
     DAMADoctrineTestBundle::class => ['test' => true],
     NelmioCorsBundle::class => ['all' => true],
+    BaldinofRoadRunnerBundle::class => ['all' => true],
 ];
